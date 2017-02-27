@@ -1,12 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1" />
 <title>Insert title here</title>
+  <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
 
-<h1>Home webpage.</h1>
+<h1>Home webpage 2</h1>
 
+Add a customer:
+<form th:action="@{/}" method="post" th:object="${customer}">
+  <label for="firstName">First name:</label>
+  <input type="text" th:field="*{firstName}" /><br/>
+  
+  <label for="lastName">Last name:</label>
+  <input type="text" th:field="*{lastName}" /><br/>
+  
+  <label for="emailAddress">Email address:</label>
+  <input type="email" th:field="*{emailAddress}" /><br/>
+  
+  <label for="phoneNumber">Phone:</label>
+  <input type="text" th:field="*{phoneNumber}" /><br/>
+  
+  <input type="submit" value="send"/>  
+</form>
+
+<h3>List of all guys:</h3>
+<table border="1">
+  <tr>
+    <td>id</td>
+    <td>firstName</td>
+    <td>lastName</td>
+    <td>emailAddress</td>
+    <td>phoneNumber</td>
+  </tr>
+
+  <!-- FOREACH: -->
+  <tr th:each="c : ${customerList} ">
+    <td th:text="${c.id}"></td>
+    <td th:text="${c.firstName}"></td>
+    <td th:text="${c.lastName}"></td>
+    <td th:text="${c.emailAddress}"></td>
+    <td th:text="${c.phoneNumber}"></td>
+  </tr>
+  
+</table>
 </body>
+
 </html>
